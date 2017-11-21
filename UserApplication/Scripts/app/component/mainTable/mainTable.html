@@ -1,31 +1,55 @@
 ﻿<div class="panel-body">
+    <div>
+        <label for='searchText'>Search:</label>
+        <input name='searchText' id='searchText' 
+               placeholder='-- Enter Search Text--'
+               class='text' ng-model='$ctrl.searchText'/>
+        
+        <button type="submit" class="btn" ng-click="$ctrl.refresh()">Search</button>
+    </div>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th class="text-right">Email</th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="user in users">
-                <td>{{user.name}}</td>
-                <td class="text-right">{{user.email}}</td>
-
-                <!-- Кнопки "удалить" и "редактировать" напротив каждой записи в таблице-->
-                <td class="text-center">
-                    <button class="btn btn-xs btn-primary" ng-click="delete(user)">
-                        Delete
-                    </button>
-                    <button class="btn btn-xs btn-primary" ng-click="editOrCreate(user)">
-                        Edit
-                    </button>
-                </td>
-            </tr>
+        <tr ng-repeat="user in $ctrl.users">
+            <td>
+                <span ng-hide="$ctrl.enableEdit[user.id]">{{user.name}}</span>
+                <input class="text-left" type="text" ng-show="$ctrl.enableEdit[user.id]" ng-model="user.name" name="Name" placeholder="Name" required />
+            </td>
+            <td class="text-left">
+                <span ng-hide="$ctrl.enableEdit[user.id]">{{user.email}}</span>
+                <input class="text-left" type="text" ng-show="$ctrl.enableEdit[user.id]" ng-model="user.email" name="Email" placeholder="Email" required />
+            </td>
+            <td class="text-left">
+                <button class="btn" ng-hide="$ctrl.enableEdit[user.id]" ng-click="$ctrl.delete(user.id)">Delete</button>
+                <button class="btn" ng-hide="$ctrl.enableEdit[user.id]" ng-click="$ctrl.enableEdit[user.id] = true;">Edit</button>
+                <button class="btn" ng-show="$ctrl.enableEdit[user.id]" ng-click="$ctrl.enableEdit[user.id] = false; $ctrl.save(user)">Save</button>
+                <button class="btn" ng-show="$ctrl.enableEdit[user.id]" ng-click="$ctrl.enableEdit[user.id] = false">Cancel</button>
+            </td>
+        </tr>
         </tbody>
+        <tfoot>
+        <tr>
+            <td>
+                <input class="text-left" type="text" ng-model="$ctrl.newUser.name" name="Name" placeholder="Name" required/>
+            </td>
+            <td>
+                <input class="text-left" type="text" ng-model="$ctrl.newUser.email" name="Email" placeholder="Email" required/>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn" ng-click="$ctrl.addUser()">Add user</button>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tfoot>
     </table>
-    <div>
-        <button class="btn btn-primary" ng-click="refresh()">Refresh</button>
-        <button class="btn btn-primary" ng-click="editOrCreate()">New</button>
-    </div>
 </div>

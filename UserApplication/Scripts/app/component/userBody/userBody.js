@@ -1,4 +1,4 @@
-﻿var app = angular.module("userApp", []);
+﻿var app = angular.module("userApp");
 
 app.component("userBody",
     {

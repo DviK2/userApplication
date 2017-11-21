@@ -32,6 +32,13 @@ namespace UserApplication.Controllers
             return Ok(new UserViewModel(editedUser));
         }
 
+        [HttpPost]
+        public IHttpActionResult DeleteUser(int id)
+        {
+            _userService.Delete(id);
+            return Ok();
+        }
+
         [HttpGet]
         public IHttpActionResult GetUsers(string search = null, int page = 1 , int pageSize = 10)
         {

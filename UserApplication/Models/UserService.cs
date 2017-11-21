@@ -14,6 +14,7 @@ namespace UserApplication.Models
         User GetUserById(int id);
         User EditOrCreate(UserViewModel user);
         List<User> GetUsers(TableProperty property);
+        void Delete(int id);
     }
 
     public class UserService : IUserService
@@ -60,6 +61,12 @@ namespace UserApplication.Models
                 .ToList();
 
             return users;
+        }
+
+        public void Delete(int id)
+        {
+            _userRepository.Remove(id);
+            _unitOfWork.SaveChanges();
         }
 
         private static void SetPaging(TableProperty property, int count)

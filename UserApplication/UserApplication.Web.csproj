@@ -193,9 +193,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserApplication.Data\UserApplication.Data.csproj">
+    <ProjectReference Include="..\UserApplication.Data\UserApplication.DAL.csproj">
       <Project>{47499AF5-CA6E-4903-B30E-8416066BAEA5}</Project>
-      <Name>UserApplication.Data</Name>
+      <Name>UserApplication.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
